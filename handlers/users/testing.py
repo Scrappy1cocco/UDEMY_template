@@ -7,10 +7,8 @@ from aiogram import types
 from states import Test
 
 
-@dp.message_handler(Command("test"), state=None)
-async def enter_test(message: types.Message, state: FSMContext):
-    data = await state.get_data(())
-    await message.answer(str(data))
+@dp.message_handler(Command("test"))
+async def enter_test(message: types.Message):
     await message.answer("Вы начали тестирование. \n"
                          "Вопрос №1. \n\n"
                          "Вы часто занимаетесь бессмысленными делами? "
@@ -38,4 +36,4 @@ async def answer_q2(message: types.Message, state: FSMContext):
     await message.answer(f"Ответ 1: {answer1}")
     await message.answer(f"Ответ 2: {answer2}")
 
-    await state.reset_state(with_data=False)
+    await state.reset_state()
